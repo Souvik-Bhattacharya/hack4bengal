@@ -1,13 +1,13 @@
-
 import Login from "@/components/Login";
-import { getHost } from "../actions";
+import { getSession } from "../actions/auth";
+import { redirect } from "next/navigation";
 
 const page = async () => {
-    const host = await getHost();
+    if (await getSession()) {
+        redirect("/myprofile/dashboard");
+    }
     return (
-        <div className="bg-[#051a39] min-h-screen w-full items-start p-5 flex justify-center">
-            <Login HOST={host} />
-        </div>
+        <Login />
     )
 }
 
